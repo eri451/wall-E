@@ -42,15 +42,14 @@ function love.update(dt)
             x = math.random(0, 15),
             dy = dy(),
             y = 0,
-            colour = colours[math.random(1, 6)],
-            fadesteps = math.random(4,10),
+            colour = colours[math.random(6)],
+            fadesteps = math.random(4, 8)
         }
         local p, r,g,b
         r, g, b = unpack(drop.colour)
         p = inbound(drop.dy * 1.3)
         r, g, b = r*p, g*p, b*p
         drop.colour = {r,g,b}
-        
         table.insert(drops, drop)
     end
 
@@ -65,10 +64,7 @@ function love.update(dt)
 
     for i, drop in ipairs(drops) do
         drop.y = drop.y + drop.dy
-        if drop.y > 15 + drop.fadesteps + 1 then
-            table.remove(drops, i)
-        end
-        if i >= 30 then
+        if drop.y > 15 + drop.fadesteps + 1 or i >= 30 then
             table.remove(drops, i)
         end
     end
