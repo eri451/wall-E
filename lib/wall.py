@@ -5,7 +5,7 @@ s = None
 def init(priority=3):
 	global s
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.connect(("172.22.99.6", 1338))
+	s.connect(("127.0.0.1", 1338))
 	s.send("04%02x\r\n" % priority)
 
 def pixel(x, y, color="ff0000"):

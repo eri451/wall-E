@@ -16,22 +16,22 @@ local input_masks = {
 
 local local_keys = {
 	{
-		up = "up",
+		--up = "up",
 		down = "down",
 		left = "left",
 		right = "right",
 		select = "rshift",
 		start = "return",
-		a = "o",
+		a = "up",
 		b = "p",
 	}, {
-		up = "w",
+		--up = "w",
 		down = "s",
 		left = "a",
 		right = "d",
 		select = "lshift",
 		start = "lctrl",
-		a = "1",
+		a = "w",
 		b = "2",
 	}
 }
