@@ -14,9 +14,9 @@ gem_colors[6] = "00bbbb"
 
 function Field:draw()
 
-	for y = 0, 14 do
+	for y = 0, self.height+1 do
 		local row = self.grid[y] or {}
-		for x = 0, 7 do
+		for x = 0, self.width+1 do
 
 			local gem = row[x]
 			if self.state == "normal" and y > 0 and x == self.x then
@@ -25,7 +25,7 @@ function Field:draw()
 			end
 
 			local color = gem and gem_colors[gem] or "888888"
-			wall:pixel(self.pos + x, y, color)
+			wall:pixel(self.pos + x-1, y-1, color)
 		end
 	end
 
@@ -34,15 +34,15 @@ function Field:draw()
 		for _, coords in pairs(self.gems_in_line) do
 			local color = ({ "ffffff", "000000" })[self.state_delay % 3 + 1]
 			if color then
-				wall:pixel(self.pos + coords.x, coords.y, color)
+				wall:pixel(self.pos + coords.x-1, coords.y-1, color)
 			end
 		end
 	end
 
 	-- draw score
 	local score = self.score
-	local y = 13
-	local x = self.pos == 0 and 7 or self.pos
+	local y = self.height
+	local x = self.pos == 0 and self.width or self.pos-1
 	while score > 0 and y >= 0 do
 		if score % 2 > 0 then
 			wall:pixel(x, y, "aaaaaa")

@@ -9,7 +9,7 @@ def init(priority=3):
 	s.send("04%02x\r\n" % priority)
 
 def pixel(x, y, color="ff0000"):
-	s.send("02%02x%02x%s\r\n" % (x+1, y+1, color))
+	s.send("02%02x%02x%s\r\n" % (x + 1, y + 1 , color)) # fixed wrong direction
 
 def frame(buf):
 	s.send("03%s\r\n" % buf)

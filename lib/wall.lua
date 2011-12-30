@@ -40,7 +40,11 @@ local local_keys = {
 function Wall:init(host, port, priority, remote_pads)
 
 	self.buffer = {}
-	for i = 1, 15 * 16 do
+
+	self.width = 16
+	self.height = 15
+
+	for i = 1, self.width * self.height do
 		self.buffer[i] = "000000"
 	end
 
@@ -82,8 +86,8 @@ function Wall:record(flag)
 end
 
 function Wall:pixel(x, y, color)
-	if 0 <= x and x < 16 and 0 <= y and y < 15 then
-		self.buffer[y * 16 + x + 1] = color
+	if 0 <= x and x < self.width and 0 <= y and y < self.height then
+		self.buffer[y * self.width + x + 1] = color
 	end
 end
 
@@ -131,11 +135,11 @@ function Wall:update_input()
 end
 
 function Wall:draw()
-	local w = love.graphics.getWidth() / 16
-	local h = love.graphics.getHeight() / 15
+	local w = love.graphics.getWidth() / self.width
+	local h = love.graphics.getHeight() / self.height
 	for i, color in ipairs(self.buffer) do
-		local x = ((i - 1) % 16) * w
-		local y = math.floor((i - 1) / 16) * h
+		local x = ((i - 1) % self.width) * w
+		local y = math.floor((i - 1) / self.width) * h
 		local r, g, b = color:match "(..)(..)(..)"
 		r = tonumber("0x" .. r)
 		g = tonumber("0x" .. g)
