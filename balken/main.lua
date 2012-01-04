@@ -1,8 +1,7 @@
 require "helper"
 require "wall"
 require "field"
---require "sound"
---require "menu"
+
 
 function love.keypressed(key)
 	if key == "escape" then
@@ -19,17 +18,17 @@ function love.keypressed(key)
 	end
 end
 
+
+
 function love.load()
 	math.randomseed(os.time())
 	time = love.timer.getTime() * 1000
 
---	wall = Wall()
-	wall = Wall(false, 1338, 3, false)
---  menu = Menu()
-    
+	wall = Wall("ledwall", 1338, 3, false)
+
 	fields = {
-		Field(8, wall.input[1]),
-		Field(0, false),	-- bot
+		Field(0, wall.input[1]),
+		Field(9, false),	-- bot
 	}
 
 	fields[1]:setOpponent(fields[2])
